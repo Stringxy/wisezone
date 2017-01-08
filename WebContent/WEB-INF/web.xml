@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0" 
+	xmlns="http://java.sun.com/xml/ns/javaee" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+	
+	  <welcome-file-list>
+    <welcome-file>login.jsp</welcome-file>
+  </welcome-file-list>
+	
+<!-- 1.配置Spring的文件  contextConfigLocation不要乱取
+	classpath:类路径
+	-->
+	<context-param>
+	     <param-name>contextConfigLocation</param-name>
+	     <param-value>classpath:applicationContext.xml</param-value>
+	</context-param>
+	
+
+	<!-- 2.使用listener  启动spring的核心类 -->
+	<listener>
+	    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	
+	<!-- 3.Spring提供的处理编码     servlet:request.setCharacterEncoding("UTF-8") 
+	  struts.xml： <constant name="struts.i18n.encoding" value="UTF-8">   
+	-->
+	<filter>
+	     <filter-name>CharacterEncoding</filter-name>
+	     <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+	     <init-param>
+	         <param-name>encoding</param-name>
+	         <param-value>UTF-8</param-value>
+	     </init-param>
+	</filter>
+	
+	<filter-mapping>
+	    <filter-name>CharacterEncoding</filter-name>
+	    <url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<!-- 4.对hibernate中延迟加载使用Spring 来进行管理 -->
+	<filter>
+	      <filter-name>openSessionInViewFilter</filter-name>
+	      <filter-class>org.springframework.orm.hibernate4.support.OpenSessionInViewFilter</filter-class>
+	</filter>
+	
+	<filter-mapping>
+	    <filter-name>openSessionInViewFilter</filter-name>
+	    <url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<filter>
+		    <filter-name>shiroFilter</filter-name>
+		    <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+		
+		    <!-- 设置true由servlet容器控制filter的生命周期 -->
+		    <init-param>
+		        <param-name>targetFilterLifecycle</param-name>
+		        <param-value>true</param-value>
+		    </init-param>
+		
+		    <!-- 设置spring容器filter的beanID，如果不设置则默认自动找与filter name一致的bean，指定更加稳定快速 -->
+		    <init-param>
+		        <param-name>targetFilterLifecycle</param-name>
+		        <param-value>shiroFilter</param-value>
+		    </init-param>
+		</filter>
+		
+		<filter-mapping>
+		    <filter-name>shiroFilter</filter-name>
+		    <url-pattern>/*</url-pattern>
+		</filter-mapping>
+			
+	
+	
+	<!-- 5.启动struts2的核心文件 -->
+	<filter>
+	    <filter-name>struts2</filter-name>
+	    <filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
+	</filter>
+	
+	<filter-mapping>
+	     <filter-name>struts2</filter-name>
+	     <url-pattern>/*</url-pattern><!-- *.action是struts2中默认设置的 -->
+</filter-mapping>
+</web-app>

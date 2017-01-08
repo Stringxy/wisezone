@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<constant name="struts.i18n.encoding" value="utf-8"></constant>
+	<constant name="struts.locale" value="UTF-8"></constant>
+	<constant name="struts.enable.DynamicMethodInvocation" value="true" />
+	<!-- 启用调试模式 -->
+	<constant name="struts.devMode" value="true"></constant>
+	<!-- 使用简单的模板theme -->
+	<constant name="struts.ui.theme" value="simple"></constant>
+	<!-- 文件大小20MB -->
+	<constant name="struts.multipart.maxSize" value="20971520"></constant>
+	<!-- 不去拦截指定的路径 -->
+	<constant name="struts.action.excludePattern" value="/common/static/*.*"></constant>
+	<constant name="struts.action.excludePattern" value="/static/*.*"></constant>
+	<!-- 访问 http://localhost:8080/strutsfrist/namespace/action[name] /login.action -->
+	<package namespace="/" name="LoginActionPackage" extends="struts-default">
+
+		<action name="login" class="com.web.controller.LoginController"
+			method="execute">
+			<result name="success" type="redirect">/index.action</result>
+			<result name="input">/login.jsp</result>
+		</action>
+	</package>
+	<package namespace="/" name="IndexActionPackage" extends="struts-default">
+		<action name="index" class="com.web.controller.IndexAction"
+			method="execute">
+			<result name="success">/index.jsp</result>
+		</action>
+	</package>
+	<package namespace="/teacher" name="TeacherPackage" extends="struts-default">
+
+
+		<action name="*" class="com.web.controller.teacher.TeacherController">
+			<result name="edit">/teacher/editteacher.jsp</result>
+			</action>
+	</package>
+	<package namespace="/baseManage" name="BaseManagePackage"
+		extends="struts-default">
+		<action name="*" class="com.web.controller.base.{1}Controller">
+			<result name="editCity">/baseManage/editcity.jsp</result>
+			<result name="deleteCity">/baseManage/city.jsp</result>
+			<result name="input">/baseManage/city.jsp</result>
+			 <result name="toMyClasses">/baseManage/myClasses.jsp</result>
+			 <result name="toTheStage">/baseManage/majorstage.jsp</result>
+		</action>
+	</package>
+	<package namespace="/StudyGame" name="StudyGamePackage"
+		extends="struts-default">
+		<action name="*" class="com.web.controller.studyGame.{1}Controller">
+			<result name="getCheck">/StudyGame/gameIndex.jsp</result>
+			<result name="getDetail">/StudyGame/details.jsp</result>
+			<result name="getQuestion">/StudyGame/question.jsp</result>
+			<result name="addRecordHistory" type="redirect">/StudyGame/Detail!getDetail.action
+			</result>
+				<result name="toCheckJsp">/QuestionManage/Check.jsp</result>
+				<result name="toDetailJsp">/QuestionManage/Detail.jsp</result>
+				<result name="toQuestionJsp">/QuestionManage/Question.jsp</result>
+			<result name="input">/QuestionManage/{1}.jsp</result>	
+			<result name="toQuestionDetailJsp">/QuestionManage/QuestionDetail.jsp</result>
+			
+		</action>
+
+	</package>
+	
+	
+	<package name="studentManagerPackage" namespace="/studentManager" extends="struts-default">
+	<action name="*"  class="com.web.controller.studentManager.{1}Controller">
+	<result name="AddInterview">/StudentManager/addinterview.jsp</result>
+	<result name="saveIv" type="redirect">/StudentManager/interview.jsp</result>
+	<result name="editIv">/StudentManager/editinterview.jsp</result>
+	<result name="editSaveIv">/StudentManager/interview.jsp</result>
+	
+	<result name="addClassTest">/StudentManager/addclasstest.jsp</result>
+	<result name="addSave" type="redirect">/StudentManager/classtest.jsp</result>
+	<result name="editClassTest">/StudentManager/editclasstest.jsp</result>
+	<result name="editSave">/StudentManager/classtest.jsp</result>
+	
+	<result name="addStageTest">/StudentManager/addstagetest.jsp</result>
+	<result name="saveSt" type="redirect">/StudentManager/stagetest.jsp</result>
+	<result name="editSt">/StudentManager/editstagetest.jsp</result>
+	<result name="saveEditSt">/StudentManager/stagetest.jsp</result>
+	
+	<result name="addIp">/StudentManager/addintegratedproject.jsp</result>
+	<result name="ipSave" type="redirect">/StudentManager/integratedproject.jsp</result>
+	<result name="editIp">/StudentManager/editintegratedproject.jsp</result>
+	<result name="ipEditSave">/StudentManager/integratedproject.jsp</result>
+	
+	<result name="addemp">/StudentManager/addemployeeinfo.jsp</result>
+	<result name="empSave" type="redirect">/StudentManager/employeeinfo.jsp</result>
+	<result name="editEmp">/StudentManager/editemployeeinfo.jsp</result>
+	<result name="empEditSave">/StudentManager/employeeinfo.jsp</result>
+	<result type="stream">
+				<!-- 文件类型mime类型(二进制文件) -->
+				<param name="contentType">application/octet-stream</param>
+				<!-- 浏览器读取流的对象inputStream类型 (public InputStream getInputStream()) -->
+				<param name="inputName">inputStream</param>
+				<!-- 设定响应头，给浏览器看的 -->
+				<param name="contentDisposition">attachment;filename="${fileName}"</param>
+				<!-- 缓存区大小 -->
+				<param name="bufferSize">4096</param>
+			</result>
+	
+	</action>
+	</package>
+	
+	
+	
+	
+	
+	<include file="baseManage/major/major.xml"></include>
+	<include file="baseManage/majorstage/majorstage.xml"></include>
+	<include file="teachers/teacher/teacher.xml"></include>
+	<include file="questionManage.xml"></include>
+	<include file="/validate/validatecode.xml"></include>
+<include file="quit.xml"></include>
+	
+
+	<include file="/StudentManage/userinfo.xml"></include>
+
+
+
+<include file="/attendance/attendance.xml"></include>
+
+</struts>

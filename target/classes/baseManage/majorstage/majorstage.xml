@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+   
+ 
+
+    <package name="addsavemajorstage" namespace="/baseManage" extends="json-default">  
+        
+         <action name="add" class="com.web.controller.base.MajorStageController" method="add">
+         <result name="add">/baseManage/addmajorstage.jsp</result>
+         </action>
+         <action name="addsavemajorstage" class="com.web.controller.base.MajorStageController" method="addSaveMajorStage">
+         	<result name="success">/baseManage/majorstage.jsp</result>
+         	<result name="input">/baseManage/addmajorstage.jsp</result>
+         </action>
+      
+   </package>
+ 
+</struts>
+  

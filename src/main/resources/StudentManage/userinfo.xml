@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+   
+   
+
+    <package name="StudentManagerPackage" namespace="/StudentManager" extends="struts-default">  
+        
+       
+         <action name="User" class="com.web.controller.studentManager.UserController" >
+        	<result name="toEditUser">/StudentManager/userEdit.jsp</result>
+        	<result name="input">/StudentManager/userEdit.jsp</result>
+        	<result type="stream">
+				<!-- 文件类型mime类型(二进制文件) -->
+				<param name="contentType">application/octet-stream</param>
+				<!-- 浏览器读取流的对象inputStream类型 (public InputStream getInputStream()) -->
+				<param name="inputName">inputStream</param>
+				<!-- 设定响应头，给浏览器看的 -->
+				<param name="contentDisposition">attachment;filename="${fileName}"</param>
+				<!-- 缓存区大小 -->
+				<param name="bufferSize">4096</param>
+			</result>
+         </action>
+      <action name="Portrait"  class="com.web.controller.PortraitController" > 
+         	<result name="success">/StudentManager/userEdit.jsp</result>
+         	<result name="input">/StudentManager/userEdit.jsp</result>
+         </action>
+   </package>
+ 
+</struts>

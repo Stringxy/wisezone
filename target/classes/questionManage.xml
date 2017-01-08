@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+   
+   <!-- 验证码 -->
+
+    <package name="questionManagePackage" namespace="/QuestionManage" extends="json-default">  
+        
+         
+         <action name="*" class="com.web.controller.questionManage.{1}Controller" >
+         	<result name="toDetailQuestionJsp">/QuestionManage/{1}.jsp</result>
+         	<result name="getMyCollectionQuestion">/QuestionManage/MyCollectionQuestion.jsp</result>
+         </action>
+      
+   </package>
+ 
+</struts>

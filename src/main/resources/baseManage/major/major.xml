@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+   
+   <!-- 验证码 -->
+
+    <package name="addsavemajor" namespace="/baseManage" extends="json-default">  
+        
+         
+         <action name="addsavemajor" class="com.web.controller.base.MajorController" method="addSaveMajor">
+         	<result name="success">/baseManage/major.jsp</result>
+         	<result name="input">/baseManage/addmajor.jsp</result>
+         </action>
+         <action name="edit" class="com.web.controller.base.MajorController" method="edit">
+         <result name="edit">/baseManage/editmajor.jsp</result>  
+         </action>
+         
+         
+      	<action name="editsavemajor" class="com.web.controller.base.MajorController" method="editSaveMajor">
+      	<result name="success">/baseManage/major.jsp</result>
+      	
+      	</action>
+      	
+      	<action name="deleteMajor" class="com.web.controller.base.MajorController" method="deleteMajor">
+      	<result name="deleteMajor" >/baseManage/major.jsp</result>
+      	</action>
+   </package>
+ 
+</struts>
+  

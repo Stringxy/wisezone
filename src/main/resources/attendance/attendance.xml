@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+
+
+
+	<package name="AttendancePackage" namespace="/AttendanceManager"
+		extends="struts-default">
+
+
+		<action name="Attendance"
+			class="com.web.controller.Attendance.AttendanceController">
+			<result name="toChoose">/AttendanceManager/chooseClass.jsp</result>
+			<result name="toAddAttendance">/AttendanceManager/addAttendance.jsp</result>
+			<result name="toAdminChoose">/AttendanceManager/AdminChoose.jsp</result>
+			<result name="toAdminSearch">/AttendanceManager/AdminSearch.jsp</result>
+		</action>
+
+		<action name="Download" class="com.web.controller.Attendance.DownloadController">
+			<result type="stream">
+				<!-- 文件类型mime类型(二进制文件) -->
+				<param name="contentType">application/octet-stream</param>
+				<!-- 浏览器读取流的对象inputStream类型 (public InputStream getInputStream()) -->
+				<param name="inputName">inputStream</param>
+				<!-- 设定响应头，给浏览器看的 -->
+				<param name="contentDisposition">attachment;filename="${fileName}"</param>
+				<!-- 缓存区大小 -->
+				<param name="bufferSize">4096</param>
+			</result>
+			
+		</action>
+
+	</package>
+
+</struts>
